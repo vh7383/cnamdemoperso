@@ -9,16 +9,12 @@ app = func.FunctionApp()
 @app.blob_trigger(arg_name="myblob", path="images",
                                connection="AzureWebJobsStorage") 
 
-@app.blob_output(arg_name="outputblob",
-                path="outputcontainer/{rand-guid}.txt",
-                connection="AzureWebJobsStorage")
-
 def HelloBlob(myblob: func.InputStream):
     logging.info(f"Python blob trigger function processed blob"
                 f"Name: {myblob.name}"
                 f"Blob Size: {myblob.length} bytes")
 
-
+logging.info('helloWorld depuis le CI/CD azure')
 
 @app.queue_trigger(arg_name="azqueue", queue_name="cnammessages",
                                connection="AzureWebJobsStorage") 
